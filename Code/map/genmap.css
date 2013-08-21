@@ -1,0 +1,19 @@
+#map_container {position:absolute;  top:110px; left:700px;}
+
+#map {height:400px; width:575px;}
+
+#map_desc{background-color:#DD9804; text-align:center;}
+
+#map_tip {
+	background:black;
+	color:white;
+	font-size:8pt;
+}
+
+.mapbkgnd {fill:none; pointer-events:all;}
+.jds{
+	fill:#aaa; stroke:#fff; stroke-width:1.5px;
+}
+
+.jds.selected {fill:#ccc; !important;}
+ 
