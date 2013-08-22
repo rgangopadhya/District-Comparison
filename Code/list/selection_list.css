@@ -1,0 +1,5 @@
+#selected{position:absolute; height:120px; width:120px; top:530px; left:700px;}
+
+#sel_list{overflow-y:auto; height:150px; width:100px; border-color:black; border:2px; border-style:solid;}
+
+.list_text{ font: 10px sans-serif;}

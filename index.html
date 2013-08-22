@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>District Comparison</title>
+        <!--  D3 library -->
+        <script type="text/javascript" src="Code/d3.v3.js"></script>	
+
+        <!-- Data -->
+		<script type="text/javascript" src="Data/new_jd_data.js"></script>
+		<script type="text/javascript" src="Data/jd_map.js"></script>
+		<script type="text/javascript" src="Data/new_cptlist.js"></script>
+		<script type="text/javascript" src="Data/metrics.js"></script>
+
+		<!-- Code for each element -->
+		<script type="text/javascript" src="Code/colorbrewer.js"></script>
+		<script type="text/javascript" src="Code/cpt_format.js"></script>
+		<link rel="stylesheet" href="Code/style.css"/>
+		<link rel="stylesheet" href="Code/tooltip.css"/>		
+
+		<script type="text/javascript" src="Code/dropdown/dropdown.js"></script>
+		<link rel="stylesheet" href="Code/dropdown/dropdown.css"/>
+
+		<script type="text/javascript" src="Code/list/selection_list.js"></script>
+		<link rel="stylesheet" href="Code/list/selection_list.css"/>        
+
+		<script type="text/javascript" src="Code/map/leaflet-0.4.js"></script>
+		<link rel="stylesheet" href="Code/map/leaflet.css"/>
+
+		<script type="text/javascript" src="Code/map/genmap.js"></script>
+		<link rel="stylesheet" href="Code/map/genmap.css"/>
+
+		<script type="text/javascript" src="Code/matrix/matrixplot.js"></script>
+        <link rel="stylesheet" href="Code/matrix/matrixplot.css"/>
+
+	</head>	
+
+	<body>
+		<div id="all">
+ 			<div id="description">
+				<div id="desc_title">District Comparison by Service</div>
+<!-- 				<div id="desc_tper">Time Period of Analysis: July 2010-June 2012</div> -->
+				<hr></hr>
+			</div> 
+			<div id="xdrop">
+				<div id="xdrop_desc" class="arrow_box_gn">
+					X-axis: Select Normalized Values for Utilization Volume      
+				</div>	
+			</div>
+
+			<div id="ydrop">
+				<div id="ydrop_desc" class="arrow_box_rd">
+					Y-axis: Select Normalized Values for Utilization Intensity
+				</div>	
+			</div>
+
+			<div id="graphics">
+				<div id="matplot">
+				</div>
+				<div id="map_container">
+					<div id="map_desc">
+						Highlight Judicial Districts by Clicking on Map
+					</div>	
+					<div id="map">
+
+					</div>	
+				</div>
+				<div id="selected">
+					<div id="clear_list">
+						<input type="button" id="clear_button" value="Clear List" disabled="disabled"/>
+					</div>	
+					<div id="sel_list">				
+					</div>	
+				</div>	
+			</div>
+			<div id="mat_zoom_help">
+				<div class="tip_head">Clicking on a plot zooms in to that plot.</br> Once zoomed, clicking on the plot again zooms back out.</br>
+				Note: Clicking on data points will not zoom the plot, but instead highlights the Judicial District</div>
+			</div>			
+		</div>
+		<script type="text/javascript">
+
+			//create a crosswalk from location key to the display name for that key 
+			var jd_xwalk = jd_map.features.map(function (d) { return {"judicial_district":d.properties.DISTRICT_A,"jd_n":d.properties.DISTRICT_N};});							
+
+			//go through each row of the location key-service key data and grab the display name, add to the location-key service key data
+			jd_level_data.forEach(function (jdcpt) {
+				var jd_match=jd_xwalk.filter(function (element) {return element.judicial_district==jdcpt.ben_loc;})[0];
+				if (typeof jd_match!='undefined') {jdcpt.jd_name=jd_match.jd_n;}
+				else if (jdcpt.ben_loc=="GU"){jdcpt.jd_name="Guam";}
+				else if (jdcpt.ben_loc=="VI"){jdcpt.jd_name="Virgin Islands";}
+			});				
+			
+			var dropdown = metricDropdown();
+			dropdown();
+
+			var chart = matrixPlot();
+
+			d3.select("#matplot")
+				.datum(CPT_groups)
+				.call(chart);
+
+			var mapHandler = genMap();
+			mapHandler();	
+			
+			var list = selectionList();
+			d3.select("#sel_list").call(list);	   	   
+			list.select_item("MIE"); list.select_item("TXS");
+			list.select_item("FLS"); list.select_item("CAC");
+
+		</script>	
+	</body>
+</html>	
+	

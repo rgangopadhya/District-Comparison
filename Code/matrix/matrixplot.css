@@ -1,0 +1,40 @@
+#matplot {height:620px; width:640px; overflow-y:auto; overflow-x:hidden; position:absolute; top:130px; left:30px; border-color:black; border:2px; border-style:solid;}
+
+.frame {fill:none; stroke:#404040;}
+
+.clickrect {fill:none; stroke:none; pointer-events: all;}
+
+.axis,
+.frame {
+  shape-rendering: crispEdges;
+}
+
+.axis line {
+  stroke: #ddd;
+}
+
+.axis path {
+  display: none;
+}
+
+.cross {stroke:#707070;}
+
+circle {fill-opacity:1; fill:lightgray; pointer-events:all;}
+
+.top_text {font-size:3pt; pointer-events:none;}
+
+#mat_tip {
+	text-align:left;
+	background:tan;
+	color:black;
+	border-color:black;
+	font-size:8pt;
+}
+
+#mat_zoom_help {
+	background:black;
+	color:white;
+	font-size:8pt;
+}
+
+#mat_zoom_help {opacity:0; width:624px; position:absolute; top:415px; left:32px; pointer-events:none;}

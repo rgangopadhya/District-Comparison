@@ -1,0 +1,14 @@
+#all {position:relative; margin:auto; width:1400px;}
+
+#description {text-align:center;}
+#desc_title {font:20px sans-serif; font-weight:600;}
+#desc_tper {font:15px sans-serif;}
+
+svg {
+  font: 10px sans-serif;
+  padding: 10px;
+}
+
+
+
+
